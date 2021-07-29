@@ -1,8 +1,10 @@
 import React from 'react';
 import Constants from 'expo-constants';
-import { Text, StyleSheet, SafeAreaView } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
+import { Route, Switch } from 'react-router-native';
+import SignIn from './SignIn';
 
 const styles = StyleSheet.create({
     container: {
@@ -17,8 +19,10 @@ const Main = () => {
     return (
         <SafeAreaView style={styles.container}>
             <AppBar />
-            <Text>Rate Repository Application</Text>
-            <RepositoryList />
+            <Switch>
+                <Route path="/" exact component={RepositoryList} />
+                <Route path="/signIn" component={SignIn} />
+            </Switch>
         </SafeAreaView>
     );
 };

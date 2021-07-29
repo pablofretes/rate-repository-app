@@ -23,6 +23,9 @@ const styles = StyleSheet.create({
     },
     colorAppBar: {
         color: theme.colors.appBarText
+    },
+    fontSizeAppBar:{
+        fontSize: theme.fontSizes.appBarSize
     }
 });
 
@@ -34,6 +37,7 @@ const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
         fontSize === 'subheading' && styles.fontSizeSubheading,
         fontWeight === 'bold' && styles.fontWeightBold,
         color === 'appBar' && styles.colorAppBar,
+        fontSize === 'appBarSize' && styles.fontSizeAppBar,
         style
     ];
 
