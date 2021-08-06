@@ -4,14 +4,14 @@ import Text from '../components/Text';
 
 export const ItemName = ({ fullName, description, language }) => (
     <View>
-        <Text fontSize='subheading' fontWeight='bold'>{fullName}</Text>
-        <Text color='textSecondary'>{description}</Text>
-        <Text color='appBar' style={styles.languageStyle}>{language} </Text>
+        <Text testID="full-name" fontSize='subheading' fontWeight='bold'>{fullName}</Text>
+        <Text testID="description" color='textSecondary'>{description}</Text>
+        <Text testID="language" color='appBar' style={styles.languageStyle}>{language} </Text>
     </View>
 );
 
 export const ItemImage = ({ ownerAvatarUrl }) => (
-    <Image style={styles.imageStyle} source={{uri: ownerAvatarUrl}}/>
+    <Image testID="image" style={styles.imageStyle} source={{uri: ownerAvatarUrl}}/>
 );
 
 
@@ -19,12 +19,12 @@ export const ItemForks = ({ forksCount }) => (
     <View>
         {forksCount >= 1000 ? (
             <View>
-                <Text fontWeight='bold'>{Number(forksCount/1000).toFixed(1) + 'k'}</Text>
+                <Text testID="forks" fontWeight='bold'>{Number(forksCount/1000).toFixed(1) + 'k'}</Text>
                 <Text>Forks</Text>
             </View>
         ) : (
             <View>
-                <Text fontWeight='bold'>{forksCount}</Text>
+                <Text testID="forks" fontWeight='bold'>{forksCount}</Text>
                 <Text>Stars</Text>
             </View>
         )}
@@ -35,12 +35,12 @@ export const ItemStars = ({ stargazersCount }) => (
     <View>
         {stargazersCount >= 1000 ? (
             <View>
-                <Text fontWeight='bold'>{Number(stargazersCount/1000).toFixed(1) + 'k'}</Text>
+                <Text testID="stargazers" fontWeight='bold'>{Number(stargazersCount/1000).toFixed(1) + 'k'}</Text>
                 <Text>Stars</Text>
             </View>
         ) : (
             <View>
-                <Text fontWeight='bold'>{stargazersCount}</Text>
+                <Text testID="stargazers" fontWeight='bold'>{stargazersCount}</Text>
                 <Text>Stars</Text>
             </View>
         )}
@@ -49,14 +49,14 @@ export const ItemStars = ({ stargazersCount }) => (
 
 export const ItemReviews = ({ reviewCount }) => (
     <View>
-        <Text fontWeight='bold'>{reviewCount}</Text>
+        <Text testID="reviews" fontWeight='bold'>{reviewCount}</Text>
         <Text>Reviews</Text>
     </View>
 );
 
 export const ItemRating = ({ ratingAverage }) => (
     <View>
-        <Text fontWeight='bold'>{ratingAverage}</Text>
+        <Text testID="rating" fontWeight='bold'>{ratingAverage}</Text>
         <Text>Rating</Text>
     </View>
 );

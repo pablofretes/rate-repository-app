@@ -33,11 +33,19 @@ const AppBar = () => {
         <ScrollView horizontal>
             <Link to="/"><Text color='appBar' fontSize='appBarSize' fontWeight='bold'>Repositories  </Text></Link>
             {userStatus ? (
-                    <Link to="/signIn" onPress={() => signOut()}><Text color='appBar' fontSize='appBarSize' fontWeight='bold'>Sign Out</Text></Link>
+                <Link to="/signIn" onPress={() => signOut()}><Text color='appBar' fontSize='appBarSize' fontWeight='bold'>Sign Out</Text></Link>
             ) : (
                 <Link to="/signIn"><Text color='appBar' fontSize='appBarSize' fontWeight='bold'>Sign In</Text></Link>
             )}
-            
+            {userStatus ? (
+                <Link to='/createReview'><Text color='appBar' fontSize='appBarSize' fontWeight='bold'> Create a Review</Text></Link>
+            ): null}
+            {userStatus ? (
+                <Link to='/reviews'><Text color='appBar' fontSize='appBarSize' fontWeight='bold'> My Reviews</Text></Link>
+            ): null}
+            {userStatus ? null : (
+                <Link to='/signUp'><Text color='appBar' fontSize='appBarSize' fontWeight='bold'> Sign Up</Text></Link>
+            )}
         </ScrollView>
     </View>
     );
