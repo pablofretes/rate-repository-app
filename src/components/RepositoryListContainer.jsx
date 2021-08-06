@@ -2,6 +2,7 @@ import React from 'react';
 import { FlatList, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { ItemImage, ItemName, ItemForks, ItemRating, ItemStars, ItemReviews } from './RepositoryItem';
 import { useHistory } from 'react-router';
+import RNPickerSelect from 'react-native-picker-select';
 
 export const stylesCard = StyleSheet.create({
     separator: {
@@ -66,7 +67,23 @@ const RenderItem = ({ item }) => {
   );
 };
 
-const RepositoryListContainer = ({ repositories }) => {
+const RenderOrder = ({ setOrderBy }) => {
+  return (
+    <View>
+      <RNPickerSelect
+        onValueChange={(value) => setOrderBy(value)}
+        items={[
+          { label: 'Latest', value: 'Latest'},
+          { label: 'Best', value: 'Best'},
+          { label: 'Worst', value: 'Worst'}
+        ]}
+        placeholder={{ label: 'Order', value: ''}}
+      />
+    </View>
+  );
+};
+
+const RepositoryListContainer = ({ repositories, setOrderBy }) => {
     
     const repositoryNodes = repositories
       ? repositories.edges.map(edge => edge.node)
@@ -79,6 +96,7 @@ const RepositoryListContainer = ({ repositories }) => {
               renderItem={({ item }) => <RenderItem item={item} />}
               keyExtractor={item => item.id}
               testID="repo-list"
+              ListHeaderComponent={() => <RenderOrder setOrderBy={setOrderBy}/>}
           />
       );
 };
