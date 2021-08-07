@@ -2,13 +2,16 @@ import React from 'react';
 import { FlatList, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { ItemImage, ItemName, ItemForks, ItemRating, ItemStars, ItemReviews } from './RepositoryItem';
 import { useHistory } from 'react-router';
-import RNPickerSelect from 'react-native-picker-select';
+import Order from './Order';
 
 export const stylesCard = StyleSheet.create({
     separator: {
       height: 10
     },
     container: {
+      position: 'relative',
+      zIndex: 30,
+      elevation: 0,
       flex: 1,
       backgroundColor: '#d3d3d3'
     },
@@ -24,7 +27,7 @@ export const stylesCard = StyleSheet.create({
       flexWrap: 'nowrap',
       justifyContent: 'space-around',
       alignItems: 'stretch',
-      paddingLeft: 10,
+      paddingLeft: 5,
       flex: 1,
     },
     boxes: {
@@ -67,22 +70,6 @@ const RenderItem = ({ item }) => {
   );
 };
 
-const RenderOrder = ({ setOrderBy }) => {
-  return (
-    <View>
-      <RNPickerSelect
-        onValueChange={(value) => setOrderBy(value)}
-        items={[
-          { label: 'Latest', value: 'Latest'},
-          { label: 'Best', value: 'Best'},
-          { label: 'Worst', value: 'Worst'}
-        ]}
-        placeholder={{ label: 'Order', value: ''}}
-      />
-    </View>
-  );
-};
-
 const RepositoryListContainer = ({ repositories, setOrderBy }) => {
     
     const repositoryNodes = repositories
@@ -96,7 +83,7 @@ const RepositoryListContainer = ({ repositories, setOrderBy }) => {
               renderItem={({ item }) => <RenderItem item={item} />}
               keyExtractor={item => item.id}
               testID="repo-list"
-              ListHeaderComponent={() => <RenderOrder setOrderBy={setOrderBy}/>}
+              ListHeaderComponent={() => <Order setOrderBy={setOrderBy}/>}
           />
       );
 };

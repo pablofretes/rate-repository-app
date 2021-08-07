@@ -13,7 +13,7 @@ const SignIn = () => {
 
         try {
             await signIn({ username, password });
-            history.push('/reviews');
+            history.push('/');
         } catch (error) {
             console.log(error);
         }

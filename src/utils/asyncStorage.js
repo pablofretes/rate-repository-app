@@ -12,14 +12,19 @@ class AuthStorage {
     }
 
     async setAccessToken(accessToken) {
-        const currentToken = await this.getAccessToken();
-        const newToken = [...currentToken, accessToken];
-
-        await AsyncStorage.setItem(`${this.namespace}:token`, JSON.stringify(newToken));
+        try {
+            await AsyncStorage.setItem(`${this.namespace}:token`, JSON.stringify(accessToken));
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     async removeAccessToken() {
-        await AsyncStorage.removeItem(`${this.namespace}:token`);
+        try {
+            await AsyncStorage.removeItem(`${this.namespace}:token`);
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 

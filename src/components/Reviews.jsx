@@ -6,20 +6,22 @@ import { ReviewItem } from './IndividualRepository';
 
 const Reviews = () => {
 
-    const { authorizedUser } = useReviews();
+    const { authorizedUser, loading } = useReviews();
     const reviews = authorizedUser.reviews.edges.map(edge => edge.node);
 
+    if(loading){
+        return (
+            <View>Loading...</View>
+        );
+    }
+
     return (
-        <View>
-            {authorizedUser ? (
-                <FlatList 
-                    data={reviews}
-                    ItemSeparatorComponent={ItemSeparator}
-                    renderItem={({ item }) => <ReviewItem item={item}/>}
-                    keyExtractor={item => item.id}
-                />
-            ) : null}
-        </View>
+        <FlatList 
+            data={reviews}
+            ItemSeparatorComponent={ItemSeparator}
+            renderItem={({ item }) => <ReviewItem item={item}/>}
+            keyExtractor={item => item.id}
+        />
     );
 };
 
