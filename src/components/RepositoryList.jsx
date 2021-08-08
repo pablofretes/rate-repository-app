@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import useRepositories from '../hooks/useRepositories';
 import RepositoryListContainer from './RepositoryListContainer';
+import { useDebounce } from 'use-debounce';
 
 const RepositoryList = () => {
   const [orderBy, setOrderBy] = useState('');
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const [debouncedText] = useDebounce(searchKeyword, 500);
+
   let values = {};
 
   if(!orderBy){
@@ -26,10 +30,14 @@ const RepositoryList = () => {
     values.orderDirection = 'ASC';
   }
 
+  if(debouncedText && debouncedText.length > 0){
+    values.searchKeyword = debouncedText;
+  }
+
   const { repositories } = useRepositories(values);
 
   return (
-    <RepositoryListContainer repositories={repositories} setOrderBy={setOrderBy}/>
+    <RepositoryListContainer repositories={repositories} setOrderBy={setOrderBy} setSearchKeyword={setSearchKeyword} searchKeyword={searchKeyword}/>
   );
 };
 

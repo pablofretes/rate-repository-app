@@ -70,22 +70,33 @@ const RenderItem = ({ item }) => {
   );
 };
 
-const RepositoryListContainer = ({ repositories, setOrderBy }) => {
+class RepositoryListContainer extends React.Component {
+  renderHeader = () => {
+    const { setOrderBy, setSearchKeyword, searchKeyword } = this.props;
     
+    return (
+      <Order setOrderBy={setOrderBy} setSearchKeyword={setSearchKeyword} searchKeyword={searchKeyword}/>
+    );
+  }
+
+  render () {
+    const { repositories } = this.props;
+
     const repositoryNodes = repositories
       ? repositories.edges.map(edge => edge.node)
       : [];
   
-      return (
-          <FlatList 
-              data={repositoryNodes} 
-              ItemSeparatorComponent={ItemSeparator} 
-              renderItem={({ item }) => <RenderItem item={item} />}
-              keyExtractor={item => item.id}
-              testID="repo-list"
-              ListHeaderComponent={() => <Order setOrderBy={setOrderBy}/>}
-          />
-      );
-};
+    return (
+      <FlatList 
+        data={repositoryNodes} 
+        ItemSeparatorComponent={ItemSeparator} 
+        renderItem={({ item }) => <RenderItem item={item} />}
+        keyExtractor={item => item.id}
+        testID="repo-list"
+        ListHeaderComponent={this.renderHeader}
+      />
+    );
+  }
+}
 
 export default RepositoryListContainer; 

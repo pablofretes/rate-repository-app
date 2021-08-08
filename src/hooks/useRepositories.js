@@ -4,7 +4,11 @@ import { GET_REPOSITORIES } from '../graphql/queries';
 const useRepositories = (values) => {
   const { data, error, loading } = useQuery(GET_REPOSITORIES, {
     fetchPolicy: 'cache-and-network',
-    variables: { orderBy: values.orderBy, orderDirection: values.orderDirection }
+    variables: { 
+      orderBy: values.orderBy, 
+      orderDirection: values.orderDirection,
+      searchKeyword: values.searchKeyword
+    }
   });
 
   if(error){

@@ -1,20 +1,19 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Button, Menu, Divider } from 'react-native-paper';
+import { Button, Menu, Divider, Searchbar } from 'react-native-paper';
 
-const Order = ({ setOrderBy }) => {
+const Order = ({ setOrderBy, searchKeyword, setSearchKeyword }) => {
     const [visible, setVisible] = React.useState(false);
     const openMenu = () => setVisible(true);
     const closeMenu = () => setVisible(false);
+    const onChangeSearch = (query) => setSearchKeyword(query);
     return (
         <View style={{
-          paddingTop: 0,
-          flexDirection: 'row',
-          justifyContent: 'center',
           position: 'relative',
           zIndex: 50,
           elevation: 50
         }}>
+          <Searchbar onChangeText={onChangeSearch} value={searchKeyword} placeholder='Search' />
           <Menu
             visible={visible}
             onDismiss={closeMenu}
